@@ -36,6 +36,8 @@ int detach_char = '\\' - 64;
 int no_suspend;
 /* The default redraw method. Initially set to unspecified. */
 int redraw_method = REDRAW_UNSPEC;
+/* 1 if we should not process input */
+int readonly;
 
 /*
 ** The original terminal settings. Shared between the master and attach
@@ -72,6 +74,7 @@ usage()
 		"  -e <char>\tSet the detach character to <char>, defaults "
 		"to ^\\.\n"
 		"  -E\t\tDisable the detach character.\n"
+		"  -o\t\tAttach in readonly mode.\n"
 		"  -r <method>\tSet the redraw method to <method>. The "
 		"valid methods are:\n"
 		"\t\t     none: Don't redraw at all.\n"
@@ -158,6 +161,8 @@ main(int argc, char **argv)
 				detach_char = -1;
 			else if (*p == 'z')
 				no_suspend = 1;
+			else if (*p == 'o')
+				readonly = 1;
 			else if (*p == 'e')
 			{
 				++argv; --argc;

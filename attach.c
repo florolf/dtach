@@ -136,6 +136,8 @@ process_kbd(int s, struct packet *pkt)
 		printf(EOS "\r\n[detached]\r\n");
 		exit(0);
 	}
+	else if (readonly)
+		return;
 	/* Just in case something pukes out. */
 	else if (pkt->u.buf[0] == '\f')
 		win_changed = 1;
